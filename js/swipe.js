@@ -1,45 +1,72 @@
-// http://stackoverflow.com/a/23230280
+// Inspired by http://stackoverflow.com/a/23230280
+// Wrapped in a module and made more reusable.
 
-document.addEventListener('touchstart', handleTouchStart, false);        
-document.addEventListener('touchmove', handleTouchMove, false);
+var swipe = (function (my) {
+	function getDefault(func) {
+		return typeof func !== 'undefined' ?  func : function() {};
+	}
 
-var xDown = null;                                                        
-var yDown = null;                                                        
+	/**
+	 * Begin listening for swipes with actions in response to swipes.
+	 * @param  {function} left  [description]
+	 * @param  {function} right [description]
+	 * @param  {function} up    [description]
+	 * @param  {function} down  [description]
+	 */
+	my.listen = function(left, right, up, down) {
+		console.log('listening for swipes');
 
-function handleTouchStart(evt) {                                         
-    xDown = evt.touches[0].clientX;                                      
-    yDown = evt.touches[0].clientY;                                      
-}
+		left = getDefault(left);
+		right = getDefault(right);
+		up = getDefault(up);
+		down = getDefault(down);
 
-function handleTouchMove(evt) {
-    if ( ! xDown || ! yDown ) {
-        return;
-    }
+		var xDown = null;                                                        
+		var yDown = null;                                                        
 
-    var xUp = evt.touches[0].clientX;                                    
-    var yUp = evt.touches[0].clientY;
+		document.addEventListener('touchstart', handleTouchStart, false);        
+		document.addEventListener('touchmove', handleTouchMove, false);
 
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
+		function handleTouchStart(evt) {
+		    xDown = evt.touches[0].clientX;                                      
+		    yDown = evt.touches[0].clientY;   
+		    left = getDefault(left);
+		    left = getDefault(left);                                   
+		}
 
-    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-        if ( xDiff > 0 ) {
-            /* left swipe */ 
-            console.log('left');
-        } else {
-            /* right swipe */
-            console.log('right');
-        }                       
-    } else {
-        if ( yDiff > 0 ) {
-            /* up swipe */ 
-            console.log('up');
-        } else { 
-            /* down swipe */
-            console.log('down');
-        }                                                                 
-    }
-    /* reset values */
-    xDown = null;
-    yDown = null;                                             
-}
+		function handleTouchMove(evt) {
+		    if ( ! xDown || ! yDown ) {
+		        return;
+		    }
+
+		    var xUp = evt.touches[0].clientX;                                    
+		    var yUp = evt.touches[0].clientY;
+
+		    var xDiff = xDown - xUp;
+		    var yDiff = yDown - yUp;
+
+		    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
+		        if ( xDiff > 0 ) {
+		            console.log('left');
+		            left();
+		        } else {
+		            console.log('right');
+		            right();
+		        }                       
+		    } else {
+		        if ( yDiff > 0 ) {
+		            console.log('up');
+		            up();
+		        } else { 
+		            console.log('down');
+		            down();
+		        }                                                                 
+		    }
+		    
+		    xDown = null;
+		    yDown = null;                                             
+		}
+	};
+
+	return my;
+}(swipe || {}));
