@@ -8,7 +8,16 @@ $(document).ready(function() {
     	return date.setDate(displayedDate.getDate() - 1);
     };
     var setNextDay = function(date) {
-    	return date.setDate(displayedDate.getDate() + 1);
+    	var today = new Date();
+    	today.setHours(0, 0, 0, 0);
+
+    	// Only set to next day if less than or equal to current day
+    	if(date < today) {
+    		return date.setDate(displayedDate.getDate() + 1);
+    	}
+    	else {
+    		return date;
+    	}
     };
 
     var updateImage = function(date) {
@@ -27,7 +36,8 @@ $(document).ready(function() {
     };
 
     // Show initial image on load
-    var displayedDate = new Date('2015-08-26');
+    var displayedDate = new Date();
+    displayedDate.setHours(0, 0, 0, 0);
     updateImage(displayedDate);
 
     var left = function() {
