@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var STATUS_LOADING = 'Loading...';
-    var STATUS_ERROR = 'Error, could not load image. Please check your internet connection or try again later.';
+    var STATUS_ERROR = 'Error loading image. Please check your internet connection or try again later.';
 
     var getDateString = function(date) {
     	return date.toISOString().substring(0, 10);
@@ -14,6 +14,8 @@ $(document).ready(function() {
 
     var updateImage = function(date) {
     	var dateString = getDateString(date);
+        var label = document.getElementById('date');
+        label.innerHTML = dateString;
 
     	var img = document.getElementById('main-img');
     	var status = document.getElementById('status');
@@ -25,10 +27,7 @@ $(document).ready(function() {
 	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
 	    })
 	    .done(function(response) {
-	    	var label = document.getElementById('date');
-	    	label.innerHTML = dateString;
-
-			img.src = 'data:image/jpeg;base64,' + response;
+	    	img.src = 'data:image/jpeg;base64,' + response;
 
 			status.style.display = 'none';
 			img.style.display = 'inline';
@@ -43,7 +42,7 @@ $(document).ready(function() {
     displayedDate.setHours(0, 0, 0, 0);
     updateImage(displayedDate);
 
-    var left = function() {
+    var leftSwipe = function() {
     	var today = new Date();
     	today.setHours(0, 0, 0, 0);
 
@@ -53,9 +52,9 @@ $(document).ready(function() {
 	    	updateImage(displayedDate);
 	    }
     };
-    var right = function() {
+    var rightSwipe = function() {
     	setPreviousDay(displayedDate);
     	updateImage(displayedDate);
     };
-    swipe.listen(left, right);
+    swipe.listen(leftSwipe, rightSwipe);
 });
