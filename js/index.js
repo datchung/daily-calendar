@@ -3,7 +3,7 @@ $(document).ready(function() {
     var STATUS_ERROR = 'Error loading image. Please check your internet connection or try again later.';
 
     var getDateString = function(date) {
-    	return date.toISOString().substring(0, 10);
+    	return date.toISOString().substring(0, 10).replace(/-/g, '.');
     };
     var setPreviousDay = function(date) {
     	return date.setDate(displayedDate.getDate() - 1);

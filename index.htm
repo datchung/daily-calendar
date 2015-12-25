@@ -14,12 +14,23 @@
 	<link rel="apple-touch-icon" sizes="152x152" href="images/home-screen/152.png">
 
     <style>
+        @font-face {
+            font-family: BasicTitle;
+            src: url('fonts/basictitlefont.ttf');
+        }
         body {
             text-align: center;
         }
         #date {
-            font-weight: normal;
-            font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin-top: 1em;
+            text-align: right;
+            color: #aaaaaa;
+            font-size: xx-large;
+            font-weight: bold;
+            font-family: BasicTitle, "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        #status {
+
         }
     	#main-img {
     		max-width: 100%;
@@ -28,7 +39,7 @@
     <!--<link rel="stylesheet" type="text/css" href="css/loader.css">-->
 </head>
 <body>
-    <h2 id="date"></h2>
+    <div id="date"></div>
     <div id="status"></div>
     <img id="main-img" />
 
