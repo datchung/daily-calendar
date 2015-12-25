@@ -12,10 +12,15 @@ $(document).ready(function() {
     };
 
     var updateImage = function(date) {
+    	var dateString = getDateString(date);
+
     	$.ajax({
-	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + getDateString(date)
+	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
 	    })
 	    .done(function(response) {
+	    	var label = document.getElementById('date');
+	    	label.innerHTML = dateString;
+
 	    	var img = document.getElementById('main-img');
 			img.src = 'data:image/jpeg;base64,' + response;
 	    });
@@ -26,11 +31,11 @@ $(document).ready(function() {
     updateImage(displayedDate);
 
     var left = function() {
-    	setPreviousDay(displayedDate);
+    	setNextDay(displayedDate);
     	updateImage(displayedDate);
     };
     var right = function() {
-    	setNextDay(displayedDate);
+    	setPreviousDay(displayedDate);
     	updateImage(displayedDate);
     };
     swipe.listen(left, right);
