@@ -1,6 +1,6 @@
 {
   "name": "daily-calendar",
-  "description": "Daily Calendar serves a different immage each day (internet access required).",
+  "description": "Daily Calendar serves a different image each day (internet access required).",
   "main": "index.js",
   "authors": [
     "Dat Chung"
