@@ -1,5 +1,6 @@
 // Inspired by http://stackoverflow.com/a/23230280
 // Wrapped in a module and made more reusable.
+// Takes into account multi-touch.
 
 var swipe = (function (my) {
 	function getDefault(func) {
