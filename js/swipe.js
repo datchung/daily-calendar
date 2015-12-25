@@ -47,18 +47,14 @@ var swipe = (function (my) {
 
 		    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
 		        if ( xDiff > 0 ) {
-		            console.log('left');
 		            left();
 		        } else {
-		            console.log('right');
 		            right();
 		        }                       
 		    } else {
 		        if ( yDiff > 0 ) {
-		            console.log('up');
 		            up();
 		        } else { 
-		            console.log('down');
 		            down();
 		        }                                                                 
 		    }
