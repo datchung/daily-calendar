@@ -15,17 +15,15 @@ var swipe = (function (my) {
 	 * @param  {function} down  [description]
 	 */
 	my.listen = function(left, right, up, down) {
-		console.log('listening for swipes');
-
 		left = getDefault(left);
 		right = getDefault(right);
 		up = getDefault(up);
 		down = getDefault(down);
 
-		var xDown = null;                                                        
-		var yDown = null;                                                        
+		var xDown = null;
+		var yDown = null;
 
-		document.addEventListener('touchstart', handleTouchStart, false);        
+		document.addEventListener('touchstart', handleTouchStart, false);
 		document.addEventListener('touchmove', handleTouchMove, false);
 
 		function handleTouchStart(evt) {
@@ -43,7 +41,7 @@ var swipe = (function (my) {
 		        return;
 		    }
 
-		    var xUp = evt.touches[0].clientX;                                    
+		    var xUp = evt.touches[0].clientX;
 		    var yUp = evt.touches[0].clientY;
 
 		    var xDiff = xDown - xUp;
@@ -54,17 +52,17 @@ var swipe = (function (my) {
 		            left();
 		        } else {
 		            right();
-		        }                       
+		        }
 		    } else {
 		        if ( yDiff > 0 ) {
 		            up();
-		        } else { 
+		        } else {
 		            down();
-		        }                                                                 
+		        }
 		    }
-		    
+
 		    xDown = null;
-		    yDown = null;                                             
+		    yDown = null;
 		}
 	};
 
