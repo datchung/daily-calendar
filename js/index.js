@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    console.log('ready');
+    var STATUS_LOADING = 'Loading...';
+    var STATUS_ERROR = 'Error, could not load image. Please check your internet connection or try again later.';
 
     var getDateString = function(date) {
     	return date.toISOString().substring(0, 10);
@@ -15,9 +16,10 @@ $(document).ready(function() {
     	var dateString = getDateString(date);
 
     	var img = document.getElementById('main-img');
+    	var status = document.getElementById('status');
     	img.style.display = 'none';
-    	var loader = document.getElementById('loader');
-    	loader.style.display = 'inline';
+    	status.style.display = 'inline';
+    	status.innerHTML = STATUS_LOADING;
 
     	$.ajax({
 	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
@@ -28,8 +30,11 @@ $(document).ready(function() {
 
 			img.src = 'data:image/jpeg;base64,' + response;
 
-			loader.style.display = 'none';
+			status.style.display = 'none';
 			img.style.display = 'inline';
+	    })
+	    .fail(function() {
+	    	status.innerHTML = STATUS_ERROR;
 	    });
     };
 
