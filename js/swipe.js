@@ -28,10 +28,13 @@ var swipe = (function (my) {
 		document.addEventListener('touchmove', handleTouchMove, false);
 
 		function handleTouchStart(evt) {
-		    xDown = evt.touches[0].clientX;                                      
-		    yDown = evt.touches[0].clientY;   
-		    left = getDefault(left);
-		    left = getDefault(left);                                   
+			// Ignore length > 1 (multi-touch)
+			if(evt.touches.length == 1) {
+			    xDown = evt.touches[0].clientX;
+			    yDown = evt.touches[0].clientY;
+			    left = getDefault(left);
+			    left = getDefault(left);
+			}
 		}
 
 		function handleTouchMove(evt) {
