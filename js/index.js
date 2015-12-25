@@ -23,6 +23,11 @@ $(document).ready(function() {
     var updateImage = function(date) {
     	var dateString = getDateString(date);
 
+    	var img = document.getElementById('main-img');
+    	img.style.display = 'none';
+    	var loader = document.getElementById('loader');
+    	loader.style.display = 'inline';
+
     	$.ajax({
 	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
 	    })
@@ -30,8 +35,10 @@ $(document).ready(function() {
 	    	var label = document.getElementById('date');
 	    	label.innerHTML = dateString;
 
-	    	var img = document.getElementById('main-img');
 			img.src = 'data:image/jpeg;base64,' + response;
+
+			loader.style.display = 'none';
+			img.style.display = 'inline';
 	    });
     };
 
