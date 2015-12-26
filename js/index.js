@@ -12,6 +12,10 @@ $(document).ready(function() {
 		return date.setDate(displayedDate.getDate() + 1);
     };
 
+    var displayDate = function(dateString) {
+        var label = document.getElementById('date');
+        label.innerHTML = dateString;
+    };
     var displayStatus = function(statusString) {
         var img = document.getElementById('main-img');
         var status = document.getElementById('status');
@@ -29,10 +33,9 @@ $(document).ready(function() {
 
     var updateImage = function(date) {
     	var dateString = getDateString(date);
-        var label = document.getElementById('date');
-        label.innerHTML = dateString;
 
-    	displayStatus(STATUS_LOADING);
+        displayDate(dateString);
+        displayStatus(STATUS_LOADING);
 
     	$.ajax({
 	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
