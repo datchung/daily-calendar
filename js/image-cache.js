@@ -4,10 +4,12 @@ var imageCache = (function (my) {
     };
 
     my.set = function(date, image) {
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        localStorage.setItem(getKey(date), image);
+        try {
+            localStorage.setItem(getKey(date), image);
+        }
+        catch(e) {
+            console.log('Cache is full. ', e);
+        }
     };
 
     my.get = function(date) {

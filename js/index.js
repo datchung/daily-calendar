@@ -40,12 +40,10 @@ $(document).ready(function() {
         var src = imageCache.get(date);
         if(src) {
             // Display mage from cache
-            console.log('cache');
             displayImage(src);
         }
         else {
             // Display image from API
-            console.log('api');
             $.ajax({
                 url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
             })
