@@ -20,7 +20,7 @@ $(document).ready(function() {
     	var img = document.getElementById('main-img');
     	var status = document.getElementById('status');
     	img.style.display = 'none';
-    	status.style.display = 'inline';
+    	status.style.display = 'inline-block';
     	status.innerHTML = STATUS_LOADING;
 
     	$.ajax({
@@ -30,7 +30,7 @@ $(document).ready(function() {
 	    	img.src = 'data:image/jpeg;base64,' + response;
 
 			status.style.display = 'none';
-			img.style.display = 'inline';
+			img.style.display = 'inline-block';
 	    })
 	    .fail(function() {
 	    	status.innerHTML = STATUS_ERROR;
