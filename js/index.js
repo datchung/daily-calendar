@@ -12,28 +12,36 @@ $(document).ready(function() {
 		return date.setDate(displayedDate.getDate() + 1);
     };
 
+    var displayStatus = function(statusString) {
+        var img = document.getElementById('main-img');
+        var status = document.getElementById('status');
+        img.style.display = 'none';
+        status.style.display = 'inline-block';
+        status.innerHTML = statusString;
+    };
+    var displayImage = function(src) {
+        var img = document.getElementById('main-img');
+        var status = document.getElementById('status');
+        img.src = 'data:image/jpeg;base64,' + src;
+        status.style.display = 'none';
+        img.style.display = 'inline-block';
+    };
+
     var updateImage = function(date) {
     	var dateString = getDateString(date);
         var label = document.getElementById('date');
         label.innerHTML = dateString;
 
-    	var img = document.getElementById('main-img');
-    	var status = document.getElementById('status');
-    	img.style.display = 'none';
-    	status.style.display = 'inline-block';
-    	status.innerHTML = STATUS_LOADING;
+    	displayStatus(STATUS_LOADING);
 
     	$.ajax({
 	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
 	    })
 	    .done(function(response) {
-	    	img.src = 'data:image/jpeg;base64,' + response;
-
-			status.style.display = 'none';
-			img.style.display = 'inline-block';
+	    	displayImage(response);
 	    })
 	    .fail(function() {
-	    	status.innerHTML = STATUS_ERROR;
+	    	displayStatus(STATUS_ERROR);
 	    });
     };
 
