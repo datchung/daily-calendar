@@ -37,15 +37,26 @@ $(document).ready(function() {
         displayDate(dateString);
         displayStatus(STATUS_LOADING);
 
-    	$.ajax({
-	    	url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
-	    })
-	    .done(function(response) {
-	    	displayImage(response);
-	    })
-	    .fail(function() {
-	    	displayStatus(STATUS_ERROR);
-	    });
+        var src = imageCache.get(date);
+        if(src) {
+            // Display mage from cache
+            console.log('cache');
+            displayImage(src);
+        }
+        else {
+            // Display image from API
+            console.log('api');
+            $.ajax({
+                url: 'http://datchung.com/daily-calendar/get.php?d=' + dateString
+            })
+            .done(function(response) {
+                displayImage(response);
+                imageCache.set(date, response);
+            })
+            .fail(function() {
+                displayStatus(STATUS_ERROR);
+            });
+        }
     };
 
     // Show initial image on load
