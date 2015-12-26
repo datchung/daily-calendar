@@ -31,7 +31,7 @@ $(document).ready(function() {
         img.style.display = 'inline-block';
     };
 
-    var updateImage = function(date) {
+    var updateDisplay = function(date) {
     	var dateString = getDateString(date);
 
         displayDate(dateString);
@@ -51,7 +51,7 @@ $(document).ready(function() {
     // Show initial image on load
     var displayedDate = new Date();
     displayedDate.setHours(0, 0, 0, 0);
-    updateImage(displayedDate);
+    updateDisplay(displayedDate);
 
     var leftSwipe = function() {
     	var today = new Date();
@@ -60,12 +60,12 @@ $(document).ready(function() {
     	// Don't allow showing a picture for a future date
     	if(displayedDate < today) {
 	    	setNextDay(displayedDate);
-	    	updateImage(displayedDate);
+	    	updateDisplay(displayedDate);
 	    }
     };
     var rightSwipe = function() {
     	setPreviousDay(displayedDate);
-    	updateImage(displayedDate);
+    	updateDisplay(displayedDate);
     };
     swipe.listen(leftSwipe, rightSwipe);
 });
