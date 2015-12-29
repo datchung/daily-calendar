@@ -1,3 +1,7 @@
+var $ = require('jquery');
+var imageCache = require('./image-cache.js');
+var swipe = require('./swipe.js');
+
 $(document).ready(function() {
     var STATUS_LOADING = 'Loading...';
     var STATUS_ERROR = 'Error loading image. Please check your internet connection or try again later.';

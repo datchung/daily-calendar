@@ -68,3 +68,6 @@ var swipe = (function (my) {
 
 	return my;
 }(swipe || {}));
+
+// exports.swipe = swipe;
+module.exports = swipe;

@@ -80,3 +80,6 @@ var imageCache = (function (my) {
 
     return my;
 }(imageCache || {}));
+
+// exports.imageCache = imageCache;
+module.exports = imageCache;
