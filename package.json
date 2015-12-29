@@ -8,7 +8,7 @@
     "lint": "node_modules/.bin/jshint js",
     "build:js": "node_modules/.bin/browserify js/index.js > dist/bundle.js",
     "build": "npm run lint && npm run build:js",
-    "build:watch": "watch 'npm run build'"
+    "build:watch": "watch \"npm run build\" css js"
   },
   "keywords": [
     "daily",
