@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "node_modules/.bin/jshint js",
-    "build:js": "node_modules/.bin/browserify js/index.js > dist/bundle.js",
+    "build:js": "node_modules/.bin/browserify js/index.js | uglifyjs -c > dist/bundle.js",
     "build": "npm run lint && npm run build:js",
     "build:watch": "watch \"npm run build\" css js"
   },
@@ -22,6 +22,7 @@
     "browserify": "^12.0.1",
     "jquery": "^2.1.4",
     "jshint": "^2.8.0",
+    "uglify-js": "^2.6.1",
     "watch": "^0.17.1"
   }
 }
