@@ -5,10 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+
     "lint": "node_modules/.bin/jshint js",
+
     "build:js": "node_modules/.bin/browserify js/index.js | uglifyjs -c > dist/bundle.js",
+    "build:js:dev": "node_modules/.bin/browserify js/index_dev.js > dist/bundle.js",
+
     "build": "npm run lint && npm run build:js",
-    "build:watch": "watch \"npm run build\" css js"
+    "build:dev": "npm run lint && npm run build:js:dev",
+
+    "build:watch": "watch \"npm run build\" css js",
+    "build:watch:dev": "watch \"npm run build:dev\" css js"
   },
   "keywords": [
     "daily",
